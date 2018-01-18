@@ -1,0 +1,33 @@
+
+
+always messages b/w server and client start with a magic words which indicate type of message (new user or existing user,type of request)  
+
+-- use '-' as delimiter     
+
+-- For verifying/creating a new customer :                  
+    existing                               new_customer  
+          admin            -- 1233      -- 1133 
+          customer         -- 1234      -- 1134
+          airline-provider -- 1235      -- 1135
+
+    If a client is logged in successfully( i.e verified by server in database) he responds with '1111' if not '2222'
+
+-- for any operations we will use :
+    1. check for flight details  -- 1342
+    2. new booking               -- 1343 
+    3. booking details           -- 1344  
+
+Examples :
+
+1) client sends a request to login a customer 
+   "1234-user_name-pwd" is sent 
+   client sends a request to create a new customer 
+   "1235-new_username-pwd"  is sent 
+
+2) client sends a request to server requesting flight details   
+   Eg : customer sending request to rx flight details :
+        1342-source-dest-date
+        1342-LAX-SFO-12/1/16
+
+        server responds with : '3333-flight_ID-seats-available' if there are any flights else '4444'
+    
