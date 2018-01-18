@@ -5,10 +5,10 @@ always messages b/w server and client start with a magic words which indicate ty
 -- use '-' as delimiter     
 
 -- For verifying/creating a new customer :                  
-    existing                               new_customer  
-          admin            -- 1233      -- 1133 
-          customer         -- 1234      -- 1134
-          airline-provider -- 1235      -- 1135
+    existing                       existing     new_customer  
+          admin            -- 1233   --66       -- 77 
+          customer         -- 1234   --66       -- 77 
+          airline-provider -- 1235   --66       -- 77 
 
     If a client is logged in successfully( i.e verified by server in database) he responds with '1111' if not '2222'
 
@@ -20,14 +20,16 @@ always messages b/w server and client start with a magic words which indicate ty
 Examples :
 
 1) client sends a request to login a customer 
-   "1234-user_name-pwd" is sent 
+   "1234-66-user_name-pwd" is sent 
    client sends a request to create a new customer 
-   "1235-new_username-pwd"  is sent 
+   "1134-77-new_username-pwd"  is sent 
 
 2) client sends a request to server requesting flight details   
    Eg : customer sending request to rx flight details :
         1342-source-dest-date
         1342-LAX-SFO-12/1/16
 
-        server responds with : '3333-flight_ID-seats-available' if there are any flights else '4444'
-    
+        server responds with : '3333#flight_ID-seats-available' if there are any flights else '4444'
+3) new booking to be done request 
+   client's msg format is Eg : 1343-flight_ID-source-dest-date-no_of-seats 
+   reply from serer will be : 3333# if succesfully , 4444# if unsuccessful 
